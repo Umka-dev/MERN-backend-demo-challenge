@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body
+    class="container-fluid d-flex flex-column justify-content-start min-vh-100 bg-light text-black"
+    style="max-width: 900px"
+  >
+    <!-- Header section -->
+    <header><%- include('./partials/nav') %></header>
+
+    <!-- Main content section -->
+    <main class="container flex-grow-1">
+      <!-- Display posts -->
+      <div>
+        <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
+        <a
+          href="/post/<%= post._id %>"
+          class="link-dark link-offset-2 link-underline link-underline-opacity-0"
+        >
+          <h2 class="fs-2 mb-2"><%= post.title %></h2>
+        </a>
+
+        <div class="d-flex flex-row justify-content-between">
+          <p class="ms-4 me-4 mb-3"><%= post.article %></p>
+
+          <!-- Delete & Update post buttons -->
+          <div class="d-flex flex-row">
+            <form action="/delete/post/<%= post._id %>" method="POST">
+              <button class="btn btn-outline-danger me-2">Delete</button>
+            </form>
+            <form action="/update/post/<%= post._id %>" method="POST">
+              <button class="btn btn-outline-success">Edit</button>
+            </form>
+          </div>
+        </div>
+        <% }) %> <% } else { %>
+        <p class="ms-4 me-4 mb-3">Here is no any posts so far...</p>
+        <% } %>
+      </div>
+      <!-- End of posts -->
+    </main>
+
+    <!-- Footer section -->
+    <%- include('./partials/footer') %>
+  </body>
+</html>
