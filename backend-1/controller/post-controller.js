@@ -32,7 +32,7 @@ const addArticle = (req, res) => {
       if (err.errors && (err.errors.title || err.errors.article)) {
         postModel
           .find()
-          .then((posts) => {
+          .then(() => {
             return res.render('add-article-page', {
               titleErr: err.errors.title,
               articleErr: err.errors.article,
@@ -43,6 +43,45 @@ const addArticle = (req, res) => {
             res.status(500).send('Internal Server Error');
           });
       }
+    });
+};
+
+const getArticle = (req, res) => {
+  postModel
+    .findById(req.params.postId)
+    .then((post) => {
+      if (!post) {
+        res.status(404).render('404page');
+      }
+      res.render('article-page', {
+        post,
+        titleErr: null,
+        articleErr: null,
+      });
+    })
+    .catch((err) => {
+      console.error('Searching error:', err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
+const editArticle = (req, res) => {};
+
+const deleteArticle = (req, res) => {
+  console.log(req.params);
+  const postId = req.params.postId;
+
+  postModel
+    .findByIdAndDelete(postId)
+    .then((deletedPost) => {
+      if (!deletedPost) {
+        return res.status(404).send('Post not found');
+      }
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
     });
 };
 
@@ -57,5 +96,8 @@ module.exports = {
   homePage,
   addArticleForm,
   addArticle,
+  getArticle,
+  editArticle,
+  deleteArticle,
   notFoundPage,
 };

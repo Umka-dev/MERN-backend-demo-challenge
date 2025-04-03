@@ -15,30 +15,31 @@
           class="link-dark link-offset-2 link-underline link-underline-opacity-0"
           ><h1 class="fs-3 fw-bold mt-4 mb-4">The New York Times</h1></a
         >
-        <a href="/new/article">Add new article</a>
+        <a href="/">Back</a>
       </nav>
     </header>
 
     <!-- Main content section -->
     <main class="container flex-grow-1">
-      <!-- Display posts -->
-      <div>
-        <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
-        <a
-          href="/article/<%= post._id %>"
-          class="link-dark link-offset-2 link-underline link-underline-opacity-0"
-        >
-          <h2 class="fs-2 mb-4"><%= post.title %></h2>
-        </a>
-
+      <!-- Display article -->
+      <div class="mb-4">
+        <% if(post){ %>
+        <h2 class="mb-4"><%= post.title %></h2>
         <div class="d-flex flex-row justify-content-between">
-          <p class="me-4 mb-3"><%= post.article %></p>
+          <%= post.article %>
         </div>
-        <% }) %> <% } else { %>
-        <p class="me-4 mb-3">Here is no any posts so far...</p>
         <% } %>
       </div>
-      <!-- End of posts -->
+      <div class="d-flex flex-row align-items-center justify-content-end mb-2">
+        <!-- Edit button -->
+        <form action="/edit/article/<%= post._id %>" method="POST">
+          <button class="btn btn-outline-success me-3">Edit article</button>
+        </form>
+        <!-- Delete button -->
+        <form action="/delete/article/<%= post._id %>" method="POST">
+          <button class="btn btn-outline-danger">Delete article</button>
+        </form>
+      </div>
     </main>
 
     <!-- Footer section -->
