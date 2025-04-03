@@ -4,6 +4,7 @@ const postSchema = new mongoose.Schema({
   title: {
     type: String,
     minlength: [26, 'Min length of the title should be over than 25 symbols'],
+    maxlength: [49, 'Max length of the title should be less than 50 symbols'],
     required: true,
   },
   article: {
@@ -11,6 +12,10 @@ const postSchema = new mongoose.Schema({
     minlength: [
       101,
       'Min length of the article should be over than 100 symbols',
+    ],
+    maxlength: [
+      999,
+      'Max length of the article should be less than 1000 symbols',
     ],
     required: true,
   },
