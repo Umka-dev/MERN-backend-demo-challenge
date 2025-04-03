@@ -65,10 +65,44 @@ const getArticle = (req, res) => {
     });
 };
 
-const editArticle = (req, res) => {};
+const editArticleForm = (req, res) => {
+  postModel
+    .findById(req.params.postId)
+    .then((post) => {
+      res.render('edit-article-page', {
+        post,
+        titleErr: null,
+        articleErr: null,
+      });
+    })
+    .catch((err) => {
+      console.error('Error:', err);
+    });
+};
+
+const editArticle = (req, res) => {
+  const postId = req.params.postId;
+  if (!postId) {
+    res.status(404).redirect('404');
+  } else if (!req.body) {
+    res.render('edit-article-page', {
+      titleErr: err.errors.title,
+      articleErr: err.errors.article,
+    });
+  } else {
+    postModel
+      .findByIdAndUpdate(postId, req.body, { new: true, runValidators: true })
+      .then(() => {
+        res.redirect(`/article/${postId}`);
+      })
+      .catch((err) => {
+        console.error('Searching error:', err);
+        res.status(500).send('Internal Server Error');
+      });
+  }
+};
 
 const deleteArticle = (req, res) => {
-  console.log(req.params);
   const postId = req.params.postId;
 
   postModel
@@ -97,6 +131,7 @@ module.exports = {
   addArticleForm,
   addArticle,
   getArticle,
+  editArticleForm,
   editArticle,
   deleteArticle,
   notFoundPage,

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body
+    class="container-fluid d-flex flex-column justify-content-start min-vh-100 bg-light text-black"
+    style="max-width: 900px"
+  >
+    <!-- Header section -->
+    <header>
+      <nav
+        class="d-flex flex-row align-items-center justify-content-between mb-2 p-1 w-100"
+      >
+        <a
+          href="/"
+          class="link-dark link-offset-2 link-underline link-underline-opacity-0"
+          ><h1 class="fs-3 fw-bold mt-4 mb-4">The New York Times</h1></a
+        >
+        <a href="/article/<%=post._id  %>">Back</a>
+      </nav>
+    </header>
+    <!-- Main content section -->
+    <main class="container flex-grow-1">
+      <!-- Create a new article form -->
+      <div class="d-flex flex-column align-items-center">
+        <h2 class="fs-4 mb-4">Edit Article</h2>
+        <form
+          action="/edit/article/<%=post._id  %>"
+          method="POST"
+          class="d-flex flex-column justify-content-center mb-5"
+          style="max-width: 450px"
+        >
+          <label for="title">Title:</label>
+          <input
+            name="title"
+            type="text"
+            value="<%=post.title%>"
+            class="mb-3"
+            required
+          />
+          <div class="d-flex flex-column justify-content-center">
+            <% if(titleErr){%>
+            <p class="text-danger"><%= titleErr %></p>
+            <% } %>
+          </div>
+          <label for="article">Article:</label>
+          <textarea name="article" cols="100" rows="10" class="mb-3" required>
+<%= post.article %></textarea
+          >
+          <div class="d-flex flex-column justify-content-center">
+            <% if(articleErr){%>
+            <p class="text-danger"><%= articleErr %></p>
+            <% } %>
+          </div>
+          <button class="btn btn-outline-primary">Save</button>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer section -->
+    <%- include('./partials/footer') %>
+  </body>
+</html>

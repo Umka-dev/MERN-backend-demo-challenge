@@ -32,9 +32,14 @@
       </div>
       <div class="d-flex flex-row align-items-center justify-content-end mb-2">
         <!-- Edit button -->
-        <form action="/edit/article/<%= post._id %>" method="POST">
-          <button class="btn btn-outline-success me-3">Edit article</button>
-        </form>
+        <button class="btn btn-outline-success me-3">
+          <a
+            href="/edit/article/<%= post._id %>"
+            class="link-offset-2 link-underline link-underline-opacity-0"
+            >Edit article</a
+          >
+        </button>
+
         <!-- Delete button -->
         <form action="/delete/article/<%= post._id %>" method="POST">
           <button class="btn btn-outline-danger">Delete article</button>
