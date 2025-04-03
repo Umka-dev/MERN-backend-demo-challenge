@@ -8,7 +8,10 @@ const postSchema = new mongoose.Schema({
   },
   article: {
     type: String,
-    minlength: [101, 'Min length of the text should be over than 100 symbols'],
+    minlength: [
+      101,
+      'Min length of the article should be over than 100 symbols',
+    ],
     required: true,
   },
 });

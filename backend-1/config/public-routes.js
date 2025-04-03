@@ -4,11 +4,10 @@ const route = express.Router();
 
 // Routes
 route.get('/', postController.homePage);
+route.get('/new/article', postController.addArticleForm);
+route.post('/new/article', postController.addArticle);
 
 //404 route
-// route.get('/*', postController.notFoundPage);
-route.use((req, res) => {
-  res.status(404).render('404-page');
-});
+route.use(postController.notFoundPage);
 
 module.exports = route;
