@@ -73,6 +73,7 @@ const editArticleForm = (req, res) => {
         post,
         titleErr: null,
         articleErr: null,
+        savingErr: null,
       });
     })
     .catch((err) => {
@@ -82,24 +83,40 @@ const editArticleForm = (req, res) => {
 
 const editArticle = (req, res) => {
   const postId = req.params.postId;
+
+  console.log('Editing article with ID:', postId);
+
   if (!postId) {
-    res.status(404).redirect('404');
-  } else if (!req.body) {
-    res.render('edit-article-page', {
-      titleErr: err.errors.title,
-      articleErr: err.errors.article,
-    });
-  } else {
-    postModel
-      .findByIdAndUpdate(postId, req.body, { new: true, runValidators: true })
-      .then(() => {
-        res.redirect(`/article/${postId}`);
-      })
-      .catch((err) => {
-        console.error('Searching error:', err);
-        res.status(500).send('Internal Server Error');
-      });
+    return res.status(404).render('404-page');
   }
+
+  postModel
+    .findByIdAndUpdate(postId, req.body, { new: true, runValidators: true })
+    .then((updatedPost) => {
+      if (!updatedPost) {
+        console.log('Article not found after update:', postId);
+        return res.status(404).render('404-page');
+      }
+      console.log('Article successfully updated:', updatedPost);
+      res.redirect('/');
+    })
+    // Handle saving changes and validation errors
+    .catch((err) => {
+      if (err.errors?.title || err.errors?.article) {
+        return res.render('edit-article-page', {
+          post: { ...req.body, _id: postId },
+          titleErr: err.errors.title ? err.errors.title : null,
+          articleErr: err.errors.article ? err.errors.article : null,
+          savingErr: null,
+        });
+      }
+      res.render('edit-article-page', {
+        post,
+        titleErr: null,
+        articleErr: null,
+        savingErr: 'Error saving article',
+      });
+    });
 };
 
 const deleteArticle = (req, res) => {

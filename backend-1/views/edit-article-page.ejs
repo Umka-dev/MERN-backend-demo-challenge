@@ -15,7 +15,7 @@
           class="link-dark link-offset-2 link-underline link-underline-opacity-0"
           ><h1 class="fs-3 fw-bold mt-4 mb-4">The New York Times</h1></a
         >
-        <a href="/article/<%=post._id  %>">Back</a>
+        <a href="/">Back</a>
       </nav>
     </header>
     <!-- Main content section -->
@@ -35,7 +35,6 @@
             type="text"
             value="<%=post.title%>"
             class="mb-3"
-            required
           />
           <div class="d-flex flex-column justify-content-center">
             <% if(titleErr){%>
@@ -43,7 +42,7 @@
             <% } %>
           </div>
           <label for="article">Article:</label>
-          <textarea name="article" cols="100" rows="10" class="mb-3" required>
+          <textarea name="article" cols="100" rows="10" class="mb-3">
 <%= post.article %></textarea
           >
           <div class="d-flex flex-column justify-content-center">
@@ -53,6 +52,11 @@
           </div>
           <button class="btn btn-outline-primary">Save</button>
         </form>
+        <div class="d-flex flex-column justify-content-center">
+          <% if(savingErr){%>
+          <p class="text-danger"><%= savingErr %></p>
+          <% } %>
+        </div>
       </div>
     </main>
 
