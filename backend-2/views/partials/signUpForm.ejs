@@ -1,0 +1,36 @@
+<form
+  action="/user/signup-login"
+  method="POST"
+  class="d-flex flex-column justify-content-center mb-4"
+  style="max-width: 450px"
+>
+  <input
+    name="first_name"
+    type="text"
+    placeholder="Your first name..."
+    class="mb-3"
+  />
+  <input
+    name="last_name"
+    type="text"
+    placeholder="Your last name..."
+    class="mb-3"
+  />
+  <input name="email" type="email" placeholder="Email..." class="mb-3" />
+  <input
+    name="password"
+    type="password"
+    placeholder="Password..."
+    class="mb-3"
+  />
+  <!-- Display errors -->
+  <div class="d-flex flex-column justify-content-center">
+    <p class="text-success mb"><strong> <%=signUpErrMessage%></strong></p>
+  </div>
+
+  <button class="btn btn-outline-primary">Create Account</button>
+</form>
+<!-- Display success message -->
+<div class="d-flex flex-column justify-content-center mb-5">
+  <p class="text-success mb"><strong><%= signUpMessage %></strong></p>
+</div>

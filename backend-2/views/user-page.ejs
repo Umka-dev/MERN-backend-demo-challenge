@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body
+    class="container-fluid d-flex flex-column justify-content-start min-vh-100 bg-light text-black"
+    style="max-width: 900px"
+  >
+    <!-- Header section -->
+    <header>
+      <nav
+        class="d-flex flex-row align-items-center justify-content-between mb-3 mt-3"
+      >
+        <div class="d-flex flex-row align-items-center">
+          <form action="/logout" method="GET">
+            <button class="btn btn-dark">Logout</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <!-- Main content section -->
+    <main class="container flex-grow-1">
+      <h2 class="fs-4 mt-4 mb-5">
+        Hello, <%= userInfo.first_name %> <%= userInfo.last_name %>
+      </h2>
+
+      <div class="d-flex flex-column bg-body-secondary rounded p-4 ps-5 mb-3">
+        <h3 class="fs-4 fw-bold mt-4 mb-4">User Information:</h3>
+        <p><strong>First Name:</strong> <%= userInfo.first_name %></p>
+        <p><strong>Last Name:</strong> <%= userInfo.last_name %></p>
+        <p><strong>Email adress:</strong> <%= userInfo.email %></p>
+        <p><strong>Password:</strong> Not this time</p>
+      </div>
+    </main>
+
+    <!-- Footer section -->
+    <%- include('./partials/footer') %>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../public/script.js" defer></script>
+  </body>
+</html>

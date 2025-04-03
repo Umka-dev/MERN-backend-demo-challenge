@@ -1,0 +1,25 @@
+<form
+  action="/user/login"
+  method="POST"
+  class="d-flex flex-column justify-content-center mb-4"
+  style="max-width: 450px"
+>
+  <input name="email" type="email" placeholder="Email..." class="mb-3" />
+  <input
+    name="password"
+    type="password"
+    placeholder="Password..."
+    class="mb-3"
+  />
+  <!-- Display errors -->
+  <div class="d-flex flex-column justify-content-center"></div>
+
+  <button class="btn btn-outline-primary">Log In</button>
+</form>
+<div class="d-flex flex-column justify-content-center">
+  <% if (noUserMessage){ %>
+  <p class="text-danger mb-3"><strong><%= noUserMessage %></strong></p>
+  <% } %> <% if (wrongPassMessage){ %>
+  <p class="text-danger mb-3"><strong><%= wrongPassMessage %></strong></p>
+  <% } %>
+</div>

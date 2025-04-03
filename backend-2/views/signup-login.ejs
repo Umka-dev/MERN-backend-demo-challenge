@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body
+    class="container-fluid d-flex flex-column justify-content-start min-vh-100 bg-light text-black"
+    style="max-width: 900px"
+  >
+    <!-- Header section -->
+    <header>
+      <nav
+        class="d-flex flex-row align-items-center justify-content-between mb-3"
+      >
+        <a
+          href="/"
+          class="link-dark link-offset-2 link-underline link-underline-opacity-0"
+          ><h1 class="fs-3 fw-bold mt-4 mb-4">Timeline</h1></a
+        >
+      </nav>
+    </header>
+    <!-- Main content section -->
+    <main class="container flex-grow-1">
+      <div class="d-flex flex-column align-items-center">
+        <!-- Sign up form -->
+        <h2 class="fs-4 mb-4">Sign Up</h2>
+        <%- include('./partials/signUpForm') %>
+      </div>
+
+      <div class="d-flex flex-column align-items-center">
+        <!-- Log in form -->
+        <h2 class="fs-4 mb-4">Log In</h2>
+        <%- include('./partials/logInForm') %>
+      </div>
+    </main>
+    <!-- Footer section -->
+    <%- include('./partials/footer') %>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../public/script.js" defer></script>
+  </body>
+</html>
