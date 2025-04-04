@@ -1,5 +1,5 @@
 <form
-  action="/"
+  action="/signup"
   method="POST"
   class="d-flex flex-column justify-content-center mb-4"
   style="max-width: 450px"
@@ -24,16 +24,19 @@
     placeholder="Password..."
     class="mb-3"
   />
-  <input name="password2" type="password" placeholder="Confirm password..." />
+  <input
+    name="confirm_password"
+    type="password"
+    placeholder="Confirm password..."
+  />
   <!-- Display errors -->
   <div class="d-flex flex-column justify-content-center">
-    <p class="text-danger"><strong> <%=signUpErrMessage%></strong></p>
-  </div>
-  <div class="d-flex flex-column justify-content-center">
     <% if(wrongSignupPassMessage) {%>
-    <p class="text-danger"><strong> <%=wrongSignupPassMessage%></strong></p>
+    <p class="text-danger mt-2">
+      <strong> <%=wrongSignupPassMessage%></strong>
+    </p>
     <% } %>
-    <p class="text-danger"><strong> <%=signUpErrMessage%></strong></p>
+    <p class="text-danger mt-2"><strong> <%=signUpErrMessage%></strong></p>
   </div>
 
   <button class="btn btn-outline-primary">Create Account</button>
