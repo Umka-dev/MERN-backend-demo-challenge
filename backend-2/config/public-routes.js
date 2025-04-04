@@ -6,8 +6,8 @@ const route = express.Router();
 // User routes
 
 route.get('/', userController.renderSignUpPage);
-route.post('/', userController.signUp);
-route.post('/', userController.logIn);
+route.post('/signup', userController.signUp);
+route.post('/login', userController.logIn);
 route.get('/logout', userController.logOut);
 route.get('/user', auth.isLoggedIn, userController.userPage);
 
