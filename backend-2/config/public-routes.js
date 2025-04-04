@@ -4,10 +4,10 @@ const userController = require('../controller/user-controller');
 const route = express.Router();
 
 // User routes
-route.get('/', auth.isLoggedIn, userController.renderHomePage);
-route.get('/user/signup-login', userController.renderSignUpPage);
-route.post('/user/signup-login', userController.signUp);
-route.post('/user/login', userController.logIn);
+
+route.get('/', userController.renderSignUpPage);
+route.post('/', userController.signUp);
+route.post('/', userController.logIn);
 route.get('/logout', userController.logOut);
 route.get('/user', auth.isLoggedIn, userController.userPage);
 

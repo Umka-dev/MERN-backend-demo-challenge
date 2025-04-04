@@ -3,7 +3,7 @@ const isLoggedIn = (req, res, next) => {
   if (token) {
     next();
   } else {
-    res.redirect('/user/signup-login');
+    res.redirect('/');
   }
 };
 
