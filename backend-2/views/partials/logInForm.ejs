@@ -1,5 +1,5 @@
 <form
-  action="/user/login"
+  action="/"
   method="POST"
   class="d-flex flex-column justify-content-center mb-4"
   style="max-width: 450px"
@@ -19,7 +19,7 @@
 <div class="d-flex flex-column justify-content-center">
   <% if (noUserMessage){ %>
   <p class="text-danger mb-3"><strong><%= noUserMessage %></strong></p>
-  <% } %> <% if (wrongPassMessage){ %>
-  <p class="text-danger mb-3"><strong><%= wrongPassMessage %></strong></p>
+  <% } %> <% if (wrongLoginPassMessage){ %>
+  <p class="text-danger mb-3"><strong><%= wrongLoginPassMessage %></strong></p>
   <% } %>
 </div>
