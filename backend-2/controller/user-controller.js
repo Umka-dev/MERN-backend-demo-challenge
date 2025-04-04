@@ -2,16 +2,13 @@ const userModel = require('../models/user-model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const renderHomePage = (req, res) => {
-  res.redirect('/user/signup-login');
-};
-
 const renderSignUpPage = (req, res) => {
   res.render('signup-login', {
     signUpErrMessage: null,
     signUpMessage: null,
     noUserMessage: null,
-    wrongPassMessage: null,
+    wrongSignupPassMessage: null,
+    wrongLoginPassMessage: null,
   });
 };
 
@@ -26,7 +23,8 @@ const signUp = async (req, res) => {
       signUpErrMessage: 'All the fields should be filled!',
       signUpMessage: null,
       noUserMessage: null,
-      wrongPassMessage: null,
+      wrongSignupPassMessage: null,
+      wrongLoginPassMessage: null,
     });
   }
 
@@ -46,7 +44,8 @@ const signUp = async (req, res) => {
           signUpErrMessage: null,
           signUpMessage: 'The user is signed up. You can log in now.',
           noUserMessage: null,
-          wrongPassMessage: null,
+          wrongSignupPassMessage: null,
+          wrongLoginPassMessage: null,
         });
       })
       .catch((err) => {
@@ -82,7 +81,8 @@ const logIn = async (req, res) => {
         signUpErrMessage: null,
         signUpMessage: null,
         noUserMessage: null,
-        wrongPassMessage: 'The password is not correct',
+        wrongSignupPassMessage: null,
+        wrongLoginPassMessage: 'The password is not correct',
       });
     }
   } else {
@@ -90,7 +90,8 @@ const logIn = async (req, res) => {
       signUpErrMessage: null,
       signUpMessage: null,
       noUserMessage: 'The user does not exist. Sign up first, please.',
-      wrongPassMessage: null,
+      wrongSignupPassMessage: null,
+      wrongLoginPassMessage: null,
     });
   }
 };
@@ -99,7 +100,7 @@ const logIn = async (req, res) => {
 const userPage = (req, res) => {
   const decodedToken = jwt.verify(req.cookies.authToken, 'User is JWT now');
   if (!decodedToken) {
-    return res.redirect('/user/signup-login');
+    return res.redirect('/');
   }
   const userInfo = decodedToken.userInfo;
   res.render('user-page', { userInfo });
@@ -107,7 +108,7 @@ const userPage = (req, res) => {
 
 const logOut = (req, res) => {
   res.clearCookie('authToken');
-  res.redirect('/user/signup-login');
+  res.redirect('/');
 };
 
 const notFoundPage = (req, res) => {
@@ -115,7 +116,6 @@ const notFoundPage = (req, res) => {
 };
 
 module.exports = {
-  renderHomePage,
   signUp,
   renderSignUpPage,
   logIn,
