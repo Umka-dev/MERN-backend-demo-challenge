@@ -15,28 +15,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: [8, 'Email length should be over than 7 symbols'],
     required: true,
+    unique: [true, 'User with this email is already exist!'],
   },
   password: {
     type: String,
     minlength: [4, 'Password length should be be over than 3 symbols'],
     required: true,
-  },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'comment',
-    },
-  ],
-  posts: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'post',
-    },
-  ],
-
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 
